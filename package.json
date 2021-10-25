@@ -3,17 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://olhazhokhova.github.io/goit-js-hw-08",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/olhazhokhova/goit-js-hw-08.git"
   },
+  "keywords": [],
   "author": "Olha <zhokhova.olha@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/olhazhokhova/goit-js-hw-08/issues"
   },
-  "homepage": "https://github.com/olhazhokhova/goit-js-hw-08#readme"
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-handlebars-precompile": "^1.0.2",
+    "parcel-plugin-nuke-dist": "^1.0.1",
+    "posthtml-include": "^1.6.2",
+    "sass": "^1.32.8"
+  }
 }
