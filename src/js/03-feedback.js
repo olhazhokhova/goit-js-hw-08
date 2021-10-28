@@ -30,7 +30,8 @@ function getSavedFormValues() {
 }
 
 function setSavedValuesToElements() {
-  getSavedFormValues() &&
+  const data = getSavedFormValues();
+  data &&
     Object.entries(data).forEach(([name, value]) => {
       feedbackForm.elements[name].value = value;
     });
