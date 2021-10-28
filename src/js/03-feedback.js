@@ -30,9 +30,8 @@ function getSavedFormValues() {
 }
 
 function setSavedValuesToElements() {
-  const data = getSavedFormValues();
-  if (data) {
-    feedbackForm.querySelector('[name="email"]').value = data.email;
-    feedbackForm.querySelector('[name="message"]').value = data.message;
-  }
+  getSavedFormValues() &&
+    Object.entries(data).forEach(([name, value]) => {
+      feedbackForm.elements[name].value = value;
+    });
 }
