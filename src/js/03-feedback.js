@@ -1,41 +1,35 @@
 import throttle from 'lodash.throttle';
 
 const FEEDBACK_FORM_STATE = 'feedback-form-state';
+const form = document.querySelector('.feedback-form');
 
-const feedbackForm = document.querySelector('.feedback-form');
+const data = { email: '', message: '' };
 
-setSavedValuesToElements();
+window.addEventListener('DOMContentLoaded', setValuesElementsForm);
 
-feedbackForm.addEventListener('input', throttle(onInputElementsForm, 500));
-feedbackForm.addEventListener('submit', onSubmitForm);
+form.addEventListener('input', throttle(setDataToLS, 500));
 
-function onInputElementsForm() {
-  const formData = new FormData(feedbackForm);
-  const formDataObject = Object.fromEntries(formData.entries());
-
-  if (formDataObject) {
-    localStorage.setItem(FEEDBACK_FORM_STATE, JSON.stringify(formDataObject));
-  }
-}
-
-function onSubmitForm(e) {
+form.addEventListener('submit', e => {
   e.preventDefault();
-  console.log(getSavedFormValues());
   e.currentTarget.reset();
   localStorage.removeItem(FEEDBACK_FORM_STATE);
+});
+
+function setDataToLS({ target: { name, value } }) {
+  data[name] = value;
+  localStorage.setItem(FEEDBACK_FORM_STATE, JSON.stringify({ ...data, [name]: value }));
 }
 
-function getSavedFormValues() {
-  const formObjectValues = localStorage.getItem(FEEDBACK_FORM_STATE);
-  if (formObjectValues) {
-    return JSON.parse(formObjectValues);
+function setValuesElementsForm() {
+  const dataFromLS = JSON.parse(localStorage.getItem(FEEDBACK_FORM_STATE));
+
+  if (dataFromLS) {
+    data.email = dataFromLS.email;
+    data.message = dataFromLS.message;
+    form.elements.email.value = dataFromLS.email;
+    form.elements.message.value = dataFromLS.message;
   }
 }
 
-function setSavedValuesToElements() {
-  const data = getSavedFormValues();
-  data &&
-    Object.entries(data).forEach(([name, value]) => {
-      feedbackForm.elements[name].value = value;
-    });
-}
+const array = JSON.parse('[]').push('hello');
+console.log(array);
